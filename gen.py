@@ -1,5 +1,4 @@
 import server
-
 def stepOne():
     print("Running step one")
     

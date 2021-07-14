@@ -1,4 +1,6 @@
-@REM set FLASK_APP=main
-@REM set FLASK_ENV=development
-start "" http://localhost:8080
-py gen.py
+@echo off
+
+set port=8080
+
+start "" http://localhost:%port%
+py gen.py %port%

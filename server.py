@@ -1,5 +1,6 @@
 from bottle import route, run, static_file
 import os
+import sys
 
 
 handlers = {}
@@ -49,7 +50,18 @@ def on(event, function):
 
 
 def start():
-    run(host='localhost', port=8080, debug=True)
+    port = None
+    if(len(sys.argv) > 1):
+        try:
+            port = int(sys.argv[1])
+        except:
+            print("Invalid port")
+    else:
+        print("using default port")
+    if(port == None):
+        port = 8080
+
+    run(host='localhost', port=port, debug=True)
 
 
 
