@@ -1,8 +1,6 @@
-#!/usr/bin/python
 from bottle import route, run, static_file
 import os
-import json
-import datetime
+
 
 handlers = {}
 
@@ -13,21 +11,17 @@ def whereThis():
 #------------routes--------------------------------
 
 @route('/')
-def hello():
-    # return "Hello World!"
+def main():
     return static_file('index.html', root=whereThis()+"/templates/")
 
 @route('/event/<name>')
 def event(name):
-    print(name)
-    print(handlers)
-
+    
     funcVal = None
     if(name in handlers):
         funcVal = handlers[name]()
     else:
         funcVal = "No event handler registered for ["+name+"]"
-
     return {'status':funcVal}
 
     
