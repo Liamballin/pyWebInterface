@@ -18,15 +18,15 @@ def main():
 @route('/event/<name>')
 def event(name):
     
-    desc = None
+    res = None
     status = False
     if(name in handlers):
-        desc = handlers[name]()
+        res = handlers[name]()
         status = True
     else:
-        desc = "No event handler registered for ["+name+"]"
+        res = "No event handler registered for ["+name+"]"
         status = False
-    return {'status':status,'desc':desc}
+    return {'status':status,'res':res}
 
     
 

@@ -3,7 +3,6 @@ def stepOne():
     print("Running step one")
     
     out = {
-        'status':True,
         'action':'log',
         'data':'67tyughjbkgguytygjhb='
     }

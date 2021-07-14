@@ -10,13 +10,28 @@ Calling the `run()` function emits an event. First argument is event name, and s
 
 ```
 
+## JavaScript
+You can set a response handler by including a JS file in index.html.
+```JavaScript
+function handleResponse(res,el){
+    
+    //do something
+    if(res.status){
+        console.log("Success")
+    }else{
+        console.log("Error")
+    }
+}
+
+```
+
 ## Python
 ```py
 import WebInterface
 
 def stepOne():
     doSomething()
-    return {'status':True}
+    return {'data':'somedata'}
 
 # Register event handler
 WebInterface.on('stepOne', stepOne)
