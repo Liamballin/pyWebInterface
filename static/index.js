@@ -1,10 +1,10 @@
 function start(){
-    // hide("res3canvas")
+    hide("res3canvas")
+    hide("res4")
 }
 
 //Keep this function
 function handleResponse(res,el){
-
 
     if(!res.status){
         console.log("Error")
@@ -14,66 +14,74 @@ function handleResponse(res,el){
 
     if(res.res.action == 'log'){
         set(res,el);
-
     }else if(res.res.action == 'pdf'){
-        console.log("Got pdf")
+        show('res3canvas')
+        setPDF()
+    }else if(res.res.action == 'csv'){
+        show("res4")
+        setGrid(res.res.data);
     }
-
-
 
 }
 
 function set(data, el){
     $(el).innerHTML = ts()+"</br>"+JSON.stringify(data, undefined, 4);
-
 }
 
 function setPDF(){
-// If absolute URL from the remote server is provided, configure the CORS
-// header on that server.
-var url = '/static/Letter.pdf';
 
-// Loaded via <script> tag, create shortcut to access PDF.js exports.
-var pdfjsLib = window['pdfjs-dist/build/pdf'];
-
-// The workerSrc property shall be specified.
-pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
-
-// Asynchronous download of PDF
-var loadingTask = pdfjsLib.getDocument(url);
-loadingTask.promise.then(function(pdf) {
-  console.log('PDF loaded');
-  
-  // Fetch the first page
-  var pageNumber = 1;
-  pdf.getPage(pageNumber).then(function(page) {
-    console.log('Page loaded');
+    var url = '/static/Letter.pdf';
+    var pdfjsLib = window['pdfjs-dist/build/pdf'];
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+    var loadingTask = pdfjsLib.getDocument(url);
+    loadingTask.promise.then(function(pdf) {
+    console.log('PDF loaded');
     
-    var scale = 1.5;
-    var viewport = page.getViewport({scale: scale});
+    var pageNumber = 1;
+    pdf.getPage(pageNumber).then(function(page) {
+        console.log('Page loaded');
+        
+        var scale =2;
+        var viewport = page.getViewport({scale: scale});
 
-    // Prepare canvas using PDF page dimensions
-    var canvas = document.getElementById('res3canvas');
-    var context = canvas.getContext('2d');
-    canvas.height = viewport.height;
-    canvas.width = viewport.width;
+        var canvas = document.getElementById('res3canvas');
+        var context = canvas.getContext('2d');
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
 
-    // Render PDF page into canvas context
-    var renderContext = {
-      canvasContext: context,
-      viewport: viewport
-    };
-    var renderTask = page.render(renderContext);
-    renderTask.promise.then(function () {
-      console.log('Page rendered');
+        var renderContext = {
+        canvasContext: context,
+        viewport: viewport
+        };
+        var renderTask = page.render(renderContext);
+        renderTask.promise.then(function () {
+        console.log('Page rendered');
+        });
     });
-  });
-}, function (reason) {
-  // PDF loading error
-  console.error(reason);
-});
+    }, function (reason) {
+    console.error(reason);
+    });
 }
 
+function setGrid(data){
+    const columnDefs = [];
+
+    let headers = Object.keys(data[0]);
+    for(let i = 0; i < headers.length;i++){
+        columnDefs.push({field:headers[i]})
+    }
+    
+    const rowData = data
+    
+    const gridOptions = {
+    columnDefs: columnDefs,
+    rowData: rowData
+    };
+
+    const gridDiv = $("res4");
+    gridDiv.className = "ag-theme-balham gridDiv"
+    new agGrid.Grid(gridDiv, gridOptions);
+}
 
 
 function $(id){
