@@ -1,9 +1,7 @@
 function run(name, el){
     console.log(`Emitting event ${name}, displaying to #${el}`)
     emitEvent(name).then(res=>{
-        handleResponse(res).then(output=>{
-            $(el).innerHTML = ts()+"</br>"+JSON.stringify(res, undefined, 4);
-        })
+        handleResponse(res,el)
     })
 }
 
@@ -16,9 +14,7 @@ function emitEvent(name){
     })
 }
 
-function $(id){
-    return document.getElementById(id);
-}
+
 
 //from stackoverflow
 function ts() {

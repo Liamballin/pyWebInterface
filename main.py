@@ -4,6 +4,7 @@ def stepOne():
     
     out = {
         'status':True,
+        'action':'log',
         'data':'67tyughjbkgguytygjhb='
     }
     return out
