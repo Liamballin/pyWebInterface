@@ -28,8 +28,6 @@ def event(name):
         status = False
     return {'status':status,'res':res}
 
-    
-
 
 @route('/static/<filename>')
 def server_static(filename):
@@ -46,11 +44,6 @@ def on(event, function):
     print(handlers)
     handlers[event]()
     
-
-
-
-
-
 
 def start():
     port = None

@@ -1,5 +1,4 @@
 function run(name, el){
-    console.log(`Emitting event ${name}, displaying to #${el}`)
     emitEvent(name).then(res=>{
         handleResponse(res,el)
     })
@@ -13,8 +12,6 @@ function emitEvent(name){
         .catch(err => reject(err))
     })
 }
-
-
 
 //from stackoverflow
 function ts() {

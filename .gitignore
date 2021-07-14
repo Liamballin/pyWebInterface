@@ -1,3 +1,4 @@
 /testFiles
 *.drawio
 /__pycache__
+*.pdf
