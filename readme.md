@@ -12,6 +12,8 @@ Calling the `run()` function emits an event. First argument is event name, and s
 
 ## JavaScript
 You can set a response handler by including a JS file in index.html.
+`res.status` will be `true` if the event name has an assosciated handler function, and `false` if not. 
+`res.res` contains the returned value from your handler function in `main.py`.
 ```JavaScript
 function handleResponse(res,el){
     
