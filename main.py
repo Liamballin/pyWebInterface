@@ -1,4 +1,4 @@
-import server
+import WebInterface
 def stepOne():
     print("Running step one")
     
@@ -9,5 +9,5 @@ def stepOne():
     return out
 
 
-server.on('stepOne', stepOne)
-server.start()
+WebInterface.on('stepOne', stepOne)
+WebInterface.start()

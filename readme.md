@@ -24,7 +24,8 @@ WebInterface.start()
 ```
 
 ## Batch file
-Running the batch file starts the server and opens the interface in the default browser. 
+Running the batch file starts the server and opens the interface in the default browser. Set the name of you main file here. 
+
 You can set the port number here.
 If not port is supplied, or the port is invalid, WebInterface will default to 8080.
 ```bat
@@ -33,5 +34,5 @@ If not port is supplied, or the port is invalid, WebInterface will default to 80
 set port=1234
 
 start "" http://localhost:%port%
-py gen.py %port%
+py main.py %port%
 ```

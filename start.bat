@@ -3,4 +3,4 @@
 set port=8080
 
 start "" http://localhost:%port%
-py gen.py %port%
+py main.py %port%
