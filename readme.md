@@ -1,5 +1,7 @@
 # Python Web Interface
 
+## Requirements:
+- bottle==0.12.19
 
 ## HTML 
 Calling the `run()` function emits an event. First argument is event name, and second is the element ID to display the results.
