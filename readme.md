@@ -33,7 +33,7 @@ function handleResponse(res,el){
 
 ## Python
 ```py
-import WebInterface
+from pyWebInterface import WebInterface
 
 def stepOne():
     doSomething()
