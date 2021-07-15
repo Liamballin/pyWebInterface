@@ -2,14 +2,10 @@ from bottle import route, run, static_file
 import os
 import sys
 
-
 handlers = {}
 
 def whereThis():
     return os.path.dirname(os.path.abspath(__file__))
-
-
-#------------routes--------------------------------
 
 @route('/')
 def main():
@@ -17,7 +13,6 @@ def main():
 
 @route('/event/<name>')
 def event(name):
-    
     res = None
     status = False
     if(name in handlers):
@@ -28,22 +23,12 @@ def event(name):
         status = False
     return {'status':status,'res':res}
 
-
 @route('/static/<filename>')
 def server_static(filename):
     return static_file(filename, root=whereThis()+"/static")
 
-
-#-----------------------------------------------------------------------
-
-
-#register handler
 def on(event, function):
-    print("Registering function on "+event)
     handlers[event] = function
-    print(handlers)
-    handlers[event]()
-    
 
 def start():
     port = None
@@ -58,8 +43,6 @@ def start():
         port = 8080
 
     run(host='localhost', port=port, debug=True)
-
-
 
 if(__name__ == "__main__"):
     start()
