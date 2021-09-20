@@ -31,7 +31,7 @@ def stepFour():
     jsonArray = []
       
     #read csv file
-    with open(whereThis()+'/static/MOCK_DATA.csv', encoding='utf-8') as csvf: 
+    with open(whereThis()+'/static/MOCK_DATA.csv') as csvf: 
         #load csv file data using csv library's dictionary reader
         csvReader = csv.DictReader(csvf) 
 
